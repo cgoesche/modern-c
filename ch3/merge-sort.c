@@ -6,13 +6,18 @@
 void merge_sort(double a[], size_t p, size_t r);
 void merge(double a[], size_t p, size_t q, size_t r);
 void print_arr(double a[], int a_len);
+int is_sorted(double a[], int len);
 
 int main(void)
 {
         double A[12] = { 0.5, 0.3, 0.2, 0.1, 0.9, 0.8, 0.7, 0.6, 0.4, 0.3, 0.1, 0.2 };
+        char* resp;
 
         merge_sort(A, 0, ARR_LEN(A) - 1);
         print_arr(A, ARR_LEN(A));
+        resp = is_sorted(A, ARR_LEN(A)) ? "" : "not";
+
+        printf("The array is %s sorted!\n", resp);
 
         return EXIT_SUCCESS;
 }
@@ -44,7 +49,9 @@ void merge(double a[], size_t p, size_t q, size_t r)
                 R[i] = a[q + 1 + i];
         }
 
-        for (int i = 0, j = 0, k = p; k <= r; k++) {
+        int i = 0, j = 0;
+        int k = p;
+        while (k <= r) {
                 if ((i < l_len) && (j >= r_len || L[i] <= R[j])) {
                         a[k] = L[i];
                         i++;
@@ -52,7 +59,18 @@ void merge(double a[], size_t p, size_t q, size_t r)
                         a[k] = R[j];
                         j++;
                 }
+        k++;
         }
+}
+
+int is_sorted(double a[], int len) {
+        int ret = 1;
+        
+        for (int i = 0; i < len; i++) {
+                if (a[i] > a[i + 1])
+                        return ret;
+        }
+        return ret;
 }
 
 void print_arr(double a[], int a_len)
