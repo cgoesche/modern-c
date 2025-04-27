@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "test-double-arr-sort.h"
 
 #define ARR_LEN(x) (sizeof(A)/sizeof(*A))
 
@@ -61,16 +62,6 @@ void merge(double a[], size_t p, size_t q, size_t r)
                 }
         k++;
         }
-}
-
-int is_sorted(double a[], int len) {
-        int ret = 1;
-        
-        for (int i = 0; i < len; i++) {
-                if (a[i] > a[i + 1])
-                        return ret;
-        }
-        return ret;
 }
 
 void print_arr(double a[], int a_len)
